@@ -1,14 +1,14 @@
 {
-    "name": "ae/salesforce-rest-sdk",
+    "name": "c0chett0/salesforce-rest-sdk",
     "description": "An SDK for the Salesforce Rest API",
     "type": "library",
     "require": {
         "php": "^7.2",
         "guzzlehttp/guzzle": "^6.3",
-        "jms/serializer": "^2.4",
+        "jms/serializer": "^1.13",
         "ramsey/uuid": "^3.8",
         "doctrine/collections": "^1.5",
-        "symfony/cache": "^4.0|^5.0",
+        "symfony/cache": "^3.4|^4.2|^5.0",
         "psr/log": "^1.1",
         "symfony/expression-language": "^3.4|^4.2|^5.0",
         "jms/metadata": "^1.0|^2.0"
