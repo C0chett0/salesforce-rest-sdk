@@ -57,7 +57,8 @@ class SObjectHandler implements SubscribingHandlerInterface
                 $visitor->startVisitingObject(
                     $classMetadata,
                     $value,
-                    []
+                    [],
+                    $context
                 );
                 switch ($class) {
                     case \DateTime::class:
@@ -76,7 +77,8 @@ class SObjectHandler implements SubscribingHandlerInterface
                 $resultArray = $visitor->endVisitingObject(
                     $classMetadata,
                     $value,
-                    []
+                    [],
+                    $context
                 );
                 $object[$field] = array_pop($resultArray);
             } else {
@@ -96,7 +98,7 @@ class SObjectHandler implements SubscribingHandlerInterface
         $sobject = new SObject();
 
         $metadata = $context->getMetadataFactory()->getMetadataForClass(SObject::class);
-        $visitor->startVisitingObject($metadata, $sobject, $type);
+        $visitor->startVisitingObject($metadata, $sobject, $type, $context);
 
         foreach ($data as $field => $value) {
             if (is_string($value)
@@ -110,7 +112,7 @@ class SObjectHandler implements SubscribingHandlerInterface
             }
         }
 
-        $visitor->endVisitingObject($metadata, $sobject, $type);
+        $visitor->endVisitingObject($metadata, $sobject, $type, $context);
 
         return $sobject;
     }

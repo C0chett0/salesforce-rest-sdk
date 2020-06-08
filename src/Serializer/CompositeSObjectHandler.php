@@ -61,7 +61,8 @@ class CompositeSObjectHandler implements SubscribingHandlerInterface
                 $visitor->startVisitingObject(
                     $classMetadata,
                     $value,
-                    []
+                    [],
+                    $context
                 );
                 switch ($class) {
                     case CompositeCollection::class:
@@ -86,7 +87,8 @@ class CompositeSObjectHandler implements SubscribingHandlerInterface
                 $resultArray = $visitor->endVisitingObject(
                     $classMetadata,
                     $value,
-                    []
+                    [],
+                    $context
                 );
                 $object[$field] = array_pop($resultArray);
             } else {
@@ -107,7 +109,7 @@ class CompositeSObjectHandler implements SubscribingHandlerInterface
         $sobject = new CompositeSObject();
 
         $metadata = $context->getMetadataFactory()->getMetadataForClass(CompositeSObject::class);
-        $visitor->startVisitingObject($metadata, $sobject, $type);
+        $visitor->startVisitingObject($metadata, $sobject, $type, $context);
 
         if (array_key_exists('attributes', $data)) {
             if (array_key_exists('type', $data['attributes'])) {
@@ -146,7 +148,7 @@ class CompositeSObjectHandler implements SubscribingHandlerInterface
             }
         }
 
-        $visitor->endVisitingObject($metadata, $sobject, $type);
+        $visitor->endVisitingObject($metadata, $sobject, $type, $context);
 
         return $sobject;
     }

@@ -54,8 +54,7 @@ class Client
             $body,
             BasicInfo::class,
             'json'
-        )
-            ;
+        );
     }
 
     /**
@@ -78,8 +77,7 @@ class Client
             $body,
             DescribeSObject::class,
             'json'
-        )
-            ;
+        );
     }
 
     /**
@@ -100,8 +98,7 @@ class Client
             $body,
             GlobalDescribe::class,
             'json'
-        )
-            ;
+        );
     }
 
     /**
@@ -134,8 +131,7 @@ class Client
             $body,
             SObject::class,
             'json'
-        )
-            ;
+        );
     }
 
     /**
@@ -244,11 +240,12 @@ class Client
         $url         = "$basePath/sobjects/$SObjectType".(null !== $id ? '/'.$id : '');
         $SObject->Id = null;
         $serializer  = $this->client->getSerializer();
+
         $request     = new Request(
             $method,
             $url,
             [],
-            $serializer->serialize($SObject, 'json')
+            $serializer->serialize($SObject->getFields(), 'json')
         );
         $response    = $this->client->send($request, $method === "patch" ? 204 : 201);
 
